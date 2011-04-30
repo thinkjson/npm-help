@@ -6,14 +6,26 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
 <script type="text/javascript">
 var show_results = function(data) {
-	console.debug(data);
-	$("#results").html(data);
+	if (data.length > 0) {
+		$("#results").html("");
+		
+		for (result in data) {
+			$("<a />").attr("href","/show/" + data[result].file)
+				.text(data[result].file)
+				.appendTo($("#results"));
+			$("<div />").html(data[result].context)
+				.appendTo($("#results"));
+		}
+	} else {
+		$("#results").html("No results found");
+	}
 };
 
 $(document).ready(function() {
 	$('#search_form').submit(function() {
 		$.ajax({
 			url: "/search",
+			cache: false,
 			type: "GET",
 			data: {
 				search: $("#search").val()

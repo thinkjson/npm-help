@@ -13,14 +13,8 @@ fs.readdir("./npm/doc", function(err, files) {
 	}
 	
 	for (var file in files) {
-		fs.readFile("./npm/doc/" + files[file], function(err, data) {
-			if (err) {
-				console.log("Could not add file to search index:")
-				console.log(err);
-			} else {
-				docs[files[file]] = data.toString();
-			}
-		});
+		var data = fs.readFileSync("./npm/doc/" + files[file]).toString();
+		docs[files[file]] = data;
 	}
 });
 
@@ -57,13 +51,14 @@ var search_docs = function(request, response) {
 
 // Show documentation
 var show_docs = function(request, response) {
-	
+	var file = fs.readFileSync("./npm/doc/" + request.params.file).toString();
+	response.send("<html><body>" + md(file) + "</body></html>");
 };
 
 // Routes
 app.use(express.static("./static"));
 app.get("/search", search_docs);
-app.get("/show", show_docs);
+app.get("/show/:file", show_docs);
 
 // Start server
 try {
