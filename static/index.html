@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Search npm docs</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+<script type="text/javascript">
+var show_results = function(data) {
+	console.debug(data);
+	$("#results").html(data);
+};
+
+$(document).ready(function() {
+	$('#search_form').submit(function() {
+		$.ajax({
+			url: "/search",
+			type: "GET",
+			data: {
+				search: $("#search").val()
+			},
+			success: show_results,
+			error: function() {
+				alert("Data could not be retrieved");
+			}
+		});
+
+		return false;
+	});
+});
+</script>
+</head>
+<body>
+<form method="get" id="search_form">
+<input type="text" name="search" id="search" />
+<input type="submit" value="Search" />
+</form>
+
+<div id="results"></div>
+</body>
+</html>
