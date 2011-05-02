@@ -3,6 +3,7 @@ var express = require('express');
 var app = express.createServer();
 var md = require("node-markdown").Markdown;
 var fs = require('fs');
+var port = process.argv[2] || 80;
 
 // Load help documents into memory
 var docs = {};
@@ -62,8 +63,8 @@ app.get("/show/:file", show_docs);
 
 // Start server
 try {
-	app.listen(80);
-	console.log("Listening on port 80");
+	app.listen(port);
+	console.log("Listening on port " + port);
 } catch (e) {
 	app.listen(8080);
 	console.log("Listening on port 8080");

@@ -11,9 +11,10 @@ var show_results = function(data) {
 		
 		for (result in data) {
 			$("<a />").attr("href","/show/" + data[result].file)
-				.text(data[result].file)
+				.text(data[result].file.replace(".md", ""))
 				.appendTo($("#results"));
 			$("<div />").html(data[result].context)
+			    .addClass("context")
 				.appendTo($("#results"));
 		}
 	} else {
@@ -40,11 +41,37 @@ $(document).ready(function() {
 	});
 });
 </script>
+<style type="text/css">
+h1 {
+    height:202px;
+    width:519px;
+    text-indent:-999em;
+    background: transparent url('http://npmjs.org/npm.png') no-repeat;
+}
+
+body {
+    width: 519px;
+    margin: 20px auto;
+    font-family: monofont;
+}
+
+.context { margin-bottom: 15px; }
+
+a { color:#f00; text-decoration:none;}
+a:hover { text-decoration:underline; }
+
+@font-face {
+    font-family:monofont;
+    src: url(http://foohack.com/tpl/fonts/Bitstream-Vera-Sans-Mono/VeraMono.ttf) format("truetype");
+}
+</style>
 </head>
 <body>
-<form method="get" id="search_form">
-<input type="text" name="search" id="search" />
-<input type="submit" value="Search" />
+<h1>npm</h1>
+<h2>Documentation</h2>
+<form method="get" id="search_form" style="width:519px;">
+<input type="text" name="search" id="search" style="width:519px;" /><br />
+<div style="text-align: right;"><input type="submit" value="Search" /></div>
 </form>
 
 <div id="results"></div>
