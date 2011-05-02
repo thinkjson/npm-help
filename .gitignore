@@ -1,2 +1,4 @@
 /.project
 /.settings
+/.monitor
+/nodemon-ignore
