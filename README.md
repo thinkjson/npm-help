@@ -1,4 +1,4 @@
-I took [this](http://twitter.com/#!/izs/status/64208326208139264) as a challenge, and coded something up in a couple of hours. Please make this better.
+I took [this](http://twitter.com/#!/izs/status/64208326208139264) as a challenge, and coded something up in a couple of hours. This became the foundations of the `npm help` command, now integrated with the tool itself.
 
 Copyright (c) 2011 Mark Cahill
 
